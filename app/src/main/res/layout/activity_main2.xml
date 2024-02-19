@@ -94,7 +94,7 @@
         tools:layout_editor_absoluteX="323dp" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/likesnumber"
         android:layout_width="18dp"
         android:layout_height="18dp"
         android:text="10"
@@ -102,7 +102,7 @@
         tools:layout_editor_absoluteY="247dp" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/repostsnumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="15"
@@ -110,7 +110,7 @@
         tools:layout_editor_absoluteY="251dp" />
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/viewsnumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="15"
