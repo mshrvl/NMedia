@@ -70,6 +70,7 @@
         android:id="@+id/likes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:background="@android:color/transparent"
         app:layout_constraintEnd_toStartOf="@+id/likesnumber"
         app:layout_constraintTop_toBottomOf="@+id/content"
@@ -88,33 +89,38 @@
         android:id="@+id/views"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
         android:background="@android:color/transparent"
+        app:layout_constraintEnd_toEndOf="@+id/content"
         app:layout_constraintTop_toBottomOf="@+id/content"
-        app:srcCompat="@drawable/c_views_24"
-        tools:layout_editor_absoluteX="323dp" />
+        app:srcCompat="@drawable/c_views_24" />
 
     <TextView
         android:id="@+id/likesnumber"
         android:layout_width="18dp"
         android:layout_height="18dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="18dp"
         android:text="10"
-        app:layout_constraintTop_toBottomOf="@+id/content"
-        tools:layout_editor_absoluteX="31dp" />
+        app:layout_constraintEnd_toStartOf="@+id/reposts"
+        app:layout_constraintTop_toBottomOf="@+id/content" />
 
     <TextView
         android:id="@+id/repostsnumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="215dp"
         android:text="15"
-        app:layout_constraintTop_toBottomOf="@+id/content"
-        tools:layout_editor_absoluteX="100dp" />
+        app:layout_constraintEnd_toStartOf="@+id/views"
+        app:layout_constraintTop_toBottomOf="@+id/content" />
 
     <TextView
         android:id="@+id/viewsnumber"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="17dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="4dp"
         android:text="15"
-        app:layout_constraintTop_toBottomOf="@+id/content"
-        tools:layout_editor_absoluteX="355dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/content" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
