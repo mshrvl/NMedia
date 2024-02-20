@@ -6,13 +6,13 @@ plugins {
 android {
     namespace = "ru.netology.nmedia"
     compileSdk = 33
-
     defaultConfig {
         applicationId = "ru.netology.nmedia"
         minSdk = 23
         targetSdk = 33
         versionCode = 1
         versionName = "1.0"
+
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
