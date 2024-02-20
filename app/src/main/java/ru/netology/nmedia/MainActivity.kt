@@ -10,3 +10,6 @@ class MainActivity : AppCompatActivity() {
     }
 }
 
+class Posts() {
+
+}
