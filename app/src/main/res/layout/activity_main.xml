@@ -73,6 +73,8 @@
         android:layout_marginEnd="8dp"
         android:background="@android:color/transparent"
         app:layout_constraintEnd_toStartOf="@+id/likesnumber"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/content"
         app:srcCompat="@drawable/ic_like_24" />
 
@@ -80,8 +82,11 @@
         android:id="@+id/reposts"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:background="@android:color/transparent"
         app:layout_constraintEnd_toStartOf="@+id/repostsnumber"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/content"
         app:srcCompat="@drawable/ic_share_24" />
 
@@ -89,9 +94,8 @@
         android:id="@+id/views"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
         android:background="@android:color/transparent"
-        app:layout_constraintEnd_toEndOf="@+id/content"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/content"
         app:srcCompat="@drawable/c_views_24" />
 
@@ -99,10 +103,10 @@
         android:id="@+id/likesnumber"
         android:layout_width="18dp"
         android:layout_height="18dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="4dp"
-        android:layout_marginEnd="18dp"
         android:text="10"
-        app:layout_constraintEnd_toStartOf="@+id/reposts"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/content" />
 
     <TextView
@@ -112,13 +116,15 @@
         android:layout_marginEnd="215dp"
         android:text="15"
         app:layout_constraintEnd_toStartOf="@+id/views"
+        app:layout_constraintHorizontal_bias="0.86"
+        app:layout_constraintStart_toStartOf="@+id/likes"
         app:layout_constraintTop_toBottomOf="@+id/content" />
 
     <TextView
         android:id="@+id/viewsnumber"
         android:layout_width="17dp"
         android:layout_height="24dp"
-        android:layout_marginEnd="4dp"
+        android:layout_marginEnd="32dp"
         android:text="15"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/content" />
