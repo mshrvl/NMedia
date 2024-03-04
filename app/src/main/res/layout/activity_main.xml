@@ -109,17 +109,7 @@
         android:layout_marginTop="4dp"
         android:text="10"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/content" /><![CDATA[
-
-    />
-
-
-
-
-
-
-
-    ]]>
+        app:layout_constraintTop_toBottomOf="@+id/content" />
 
     <TextView
         android:id="@+id/repostsnumber"
