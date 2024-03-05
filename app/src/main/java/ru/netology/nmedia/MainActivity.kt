@@ -11,7 +11,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.likes.setOnClickListener { binding.likes.setImageResource(R.drawable.ic_liked_24) }
+
 
         val post = Post(
             id = 1,
@@ -48,6 +48,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
+
+
 
 
 
