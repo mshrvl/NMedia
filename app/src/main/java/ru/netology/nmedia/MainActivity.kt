@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.ImageButton
 import ru.netology.nmedia.databinding.ActivityMainBinding
 import ru.netology.nmedia.dto.Post
+import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,8 +46,29 @@ class MainActivity : AppCompatActivity() {
 
 
             }
+
         }
     }
+    private fun updateLikes(post: Post, likeButton: ImageButton, likesNumberView: TextView) {
+        val formattedLikes = formatNumber(post.likes)
+        likesNumberView.text = formattedLikes
+        likeButton.setImageResource(if (post.likedByMe) R.drawable.ic_liked_24 else R.drawable.ic_like_24)
+    }
+
+    private fun updateReposts(post: Post, repostsNumberView: TextView) {
+        val formattedReposts = formatNumber(post.repostsN)
+        repostsNumberView.text = formattedReposts
+    }
+
+    private fun formatNumber(number: Int): String {
+        return when {
+            number >= 1_000 && number < 10_000 -> "${number / 1_000}K"
+            number >= 10_000 && number < 1_000_000 -> "${number / 1_000}.${(number % 1_000) / 100}K"
+            number >= 1_000_000 -> "${number / 1_000_000}.${(number % 1_000_000) / 100_000}M"
+            else -> number.toString()
+        }
+    }
+}
 }
 
 
