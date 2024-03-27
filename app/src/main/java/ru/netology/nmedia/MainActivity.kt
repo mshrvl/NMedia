@@ -37,11 +37,13 @@ class MainActivity : AppCompatActivity() {
                 post.likedByMe = !post.likedByMe
                 likes.setImageResource(if (post.likedByMe)R.drawable.ic_liked_24 else R.drawable.ic_like_24)
                 likesnumber.text = post.likes.toString()
+                updateLikes(post, likes, likesnumber)
             }
             reposts.setOnClickListener {
                 if(post.repostByMe) post.repostsN++
                 post.repostByMe = !post.repostByMe
                 repostsnumber.text = post.repostsN.toString()
+                updateReposts(post, repostsnumber)
 
 
 
