@@ -103,7 +103,7 @@
 
     <TextView
         android:id="@+id/likesnumber"
-        android:layout_width="18dp"
+        android:layout_width="wrap_content"
         android:layout_height="18dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="4dp"

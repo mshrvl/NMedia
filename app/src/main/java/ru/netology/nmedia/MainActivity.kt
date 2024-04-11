@@ -29,8 +29,6 @@ class MainActivity : AppCompatActivity() {
             author.text = post.author
             published.text = post.published
             content.text = post.content
-            likesnumber.text = post.likes.toString()
-            repostsnumber.text = post.repostsN.toString()
 
             likesnumber.text = formatNumber(post.likes)
             repostsnumber.text = formatNumber(post.repostsN)
@@ -67,7 +65,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun formatNumber(number: Int): String {
         return when {
-            number >= 1_000 && number < 10_000 -> "${number / 1_000}K"
+            number >= 1_000 && number < 10_000 -> "${number / 1_000}.${(number / 100) % 10}K"
             number >= 10_000 && number < 100_000 -> "${number / 1_000}K"
             number >= 100_000 && number < 1_000_000 -> "${number / 10_000}.${(number % 10_000) / 1_000}M"
             else -> number.toString()
