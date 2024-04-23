@@ -6,12 +6,7 @@
     android:padding="16dp"
     android:layout_height="match_parent">
 
-    <data>
 
-        <variable
-            name="viewModel"
-            type="ru.netology.nmedia.PostViewModel" />
-    </data>
     <ImageView
         android:id="@+id/avatar"
         android:layout_width="61dp"

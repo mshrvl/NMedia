@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun formatNumber(number: Int): String {
-        // Оставьте вашу функцию formatNumber без изменений
+
         return when {
             number >= 1_000 && number < 10_000 -> "${number / 1_000}.${(number / 100) % 10}K"
             number >= 10_000 && number < 100_000 -> "${number / 1_000}K"
@@ -48,3 +48,4 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
+
