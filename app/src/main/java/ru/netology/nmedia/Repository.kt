@@ -49,14 +49,21 @@ class PostRepositoryInMemoryImpl : PostRepository {
     override fun get(): LiveData<List<Post>> = data
 
     override fun likeById(id: Long) {
-        data.value?.let { post ->
-            val newLikesCount = if (post.likedByMe) post.likes - 1 else post.likes + 1
-            data.value = post.copy(likedByMe = !post.likedByMe, likes = newLikesCount)
+        data.value?.let { posts ->
+            val newList = posts.map { post ->
+                if (id == post.id) {
+                    val newLikesCount = if (post.likedByMe) post.likes - 1 else post.likes + 1
+                    post.copy(likes = newLikesCount, likedByMe = !post.likedByMe)
+                } else {
+                    post
+                }
+            }
+            data.value = newList
         }
     }
 
     override fun repost() {
-        data.value?.let { post ->
+        data.value?.let { posts ->
             data.value = post.copy(repostsN = post.repostsN + 1)
         }
     }
