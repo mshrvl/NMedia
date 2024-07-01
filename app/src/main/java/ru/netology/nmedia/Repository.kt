@@ -5,28 +5,50 @@ import androidx.lifecycle.MutableLiveData
 import ru.netology.nmedia.dto.Post
 
 interface PostRepository {
-    fun get(): LiveData<Post>
-    fun like()
+    fun get(): LiveData<List<Post>>
+    fun likeById(id: Long)
     fun repost()
 }
 
 class PostRepositoryInMemoryImpl : PostRepository {
     private val data = MutableLiveData(
-        Post(
-            id = 1,
-            author = "Нетология. Университет интернет-профессий будущего",
-            published = "21 мая в 18:36",
-            content = "Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу. Затем появились курсы по дизайну, разработке, аналитике и управлению. Мы растём сами и помогаем расти студентам: от новичков до уверенных профессионалов. Но самое важное остаётся с нами: мы верим, что в каждом уже есть сила, которая заставляет хотеть больше, целиться выше, бежать быстрее. Наша миссия — помочь встать на путь роста и начать цепочку перемен → http://netolo.gy/fyb",
-            likes = 10,
-            likedByMe = false,
-            repostsN = 15,
-            repostByMe = false
+        listOf(
+            Post(
+                id = 1,
+                author = "Нетология. Университет интернет-профессий будущего",
+                published = "21 мая в 18:36",
+                content = "Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу. Затем появились курсы по дизайну, разработке, аналитике и управлению. Мы растём сами и помогаем расти студентам: от новичков до уверенных профессионалов. Но самое важное остаётся с нами: мы верим, что в каждом уже есть сила, которая заставляет хотеть больше, целиться выше, бежать быстрее. Наша миссия — помочь встать на путь роста и начать цепочку перемен → http://netolo.gy/fyb",
+                likes = 10,
+                likedByMe = false,
+                repostsN = 15,
+                repostByMe = false
+            ),
+            Post(
+                id = 2,
+                author = "Нетология",
+                published = "24 мая в 18:36",
+                content = "Всем привет, меня зовут Лолошка",
+                likes = 132,
+                likedByMe = false,
+                repostsN = 73,
+                repostByMe = false
+            ),
+            Post(
+                id = 3,
+                author = "ЦифраЛаба",
+                published = "21 мая в 13:42",
+                content = "Всем привет, Виталя лучший ментор по андроид разработке",
+                likes = 182,
+                likedByMe = false,
+                repostsN = 51,
+                repostByMe = false
+            )
         )
     )
 
-    override fun get(): LiveData<Post> = data
+    override fun get(): LiveData<List<Post>> = data
 
-    override fun like() {
+    override fun likeById(id: Long) {
         data.value?.let { post ->
             val newLikesCount = if (post.likedByMe) post.likes - 1 else post.likes + 1
             data.value = post.copy(likedByMe = !post.likedByMe, likes = newLikesCount)
@@ -35,7 +57,7 @@ class PostRepositoryInMemoryImpl : PostRepository {
 
     override fun repost() {
         data.value?.let { post ->
-             data.value = post.copy(repostsN = post.repostsN + 1)
+            data.value = post.copy(repostsN = post.repostsN + 1)
         }
     }
 }
