@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import ru.netology.nmedia.databinding.PostBinding
 import ru.netology.nmedia.dto.Post
 
-class PostViewHolder(val view: PostBinding) : RecyclerView.ViewHolder(view.root) {
+class PostViewHolder(val view: PostBinding, val onLikeListener: OnLikeListener, val onRepostListener: OnRepostListener) : RecyclerView.ViewHolder(view.root) {
     fun bind(post: Post) {
         view.apply {
             author.text = post.author
@@ -15,6 +15,12 @@ class PostViewHolder(val view: PostBinding) : RecyclerView.ViewHolder(view.root)
             likesnumber.text = formatNumber(post.likes)
             repostsnumber.text = formatNumber(post.repostsN)
             likes.setImageResource(if (post.likedByMe) R.drawable.ic_liked_24 else R.drawable.ic_like_24)
+            likes.setOnClickListener {
+                onLikeListener(post)
+            }
+            reposts.setOnClickListener {
+                onRepostListener(post)
+            }
         }
     }
 
@@ -27,8 +33,10 @@ class PostViewHolder(val view: PostBinding) : RecyclerView.ViewHolder(view.root)
         }
     }
 }
+typealias OnLikeListener = (post: Post) -> Unit
+typealias OnRepostListener = (post: Post) -> Unit
 
-class PostsAdapter : RecyclerView.Adapter<PostViewHolder>() {
+class PostsAdapter(private val onLikeListener: OnLikeListener, private val onRepostListener: OnRepostListener) : RecyclerView.Adapter<PostViewHolder>() {
     var list = emptyList<Post>(
     )
         set(value) {
@@ -38,7 +46,7 @@ class PostsAdapter : RecyclerView.Adapter<PostViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         val binding = PostBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return PostViewHolder(binding)
+        return PostViewHolder(binding, onLikeListener, onRepostListener)
     }
 
     override fun getItemCount() = list.size
