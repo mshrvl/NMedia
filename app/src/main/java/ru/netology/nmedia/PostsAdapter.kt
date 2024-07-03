@@ -37,17 +37,11 @@ class PostViewHolder(val view: PostBinding, val onLikeListener: OnLikeListener, 
 typealias OnLikeListener = (post: Post) -> Unit
 typealias OnRepostListener = (post: Post) -> Unit
 
-class PostsAdapter(private val onLikeListener: OnLikeListener, private val onRepostListener: OnRepostListener): ListAdapter<Post, PostViewHolder>(PostRepositoryInMemoryImpl.PostDiffCallback()) {
-    //var list = emptyList<Post>(
-    //)
-    //set(value) {
-    //field = value
-    //notifyDataSetChanged()
-    //}
+class PostsAdapter(private val onLikeClick: OnLikeListener, private val onRepostClick: OnRepostListener): ListAdapter<Post, PostViewHolder>(PostRepositoryInMemoryImpl.PostDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         val binding = PostBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return PostViewHolder(binding, onLikeListener, onRepostListener)
+        return PostViewHolder(binding, onLikeClick, onRepostClick)
     }
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
