@@ -2,6 +2,7 @@ package ru.netology.nmedia
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.recyclerview.widget.DiffUtil
 import ru.netology.nmedia.dto.Post
 
 interface PostRepository {
@@ -103,6 +104,16 @@ class PostRepositoryInMemoryImpl : PostRepository {
                 }
             }
             data.value = newList
+        }
+    }
+
+    class PostDiffCallback: DiffUtil.ItemCallback<Post>(){
+        override fun areItemsTheSame(oldItem: Post, newItem: Post): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: Post, newItem: Post): Boolean {
+            return oldItem == newItem
         }
     }
 }

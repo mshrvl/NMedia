@@ -19,10 +19,10 @@ class MainActivity : AppCompatActivity() {
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val manager = LinearLayoutManager(this)
-        binding.postsList!!.adapter = adapter
+        binding.postsList.adapter = adapter
         binding.postsList.layoutManager = manager
         viewModel.data.observe(this) { post ->
-            adapter.list = post
+            adapter.submitList(post)
         }
 
     }
