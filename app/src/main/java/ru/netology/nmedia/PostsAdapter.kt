@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import ru.netology.nmedia.databinding.PostBinding
 import ru.netology.nmedia.dto.Post
 
-class PostViewHolder(val view: PostBinding, val onLikeListener: OnLikeListener, val onRepostListener: OnRepostListener) : RecyclerView.ViewHolder(view.root) {
+class PostViewHolder(val view: PostBinding, val onLikeClick: OnLikeListener, val onRepostClick: OnRepostListener) : RecyclerView.ViewHolder(view.root) {
     fun bind(post: Post) {
         view.apply {
             author.text = post.author
@@ -17,10 +17,10 @@ class PostViewHolder(val view: PostBinding, val onLikeListener: OnLikeListener, 
             repostsnumber.text = formatNumber(post.repostsN)
             likes.setImageResource(if (post.likedByMe) R.drawable.ic_liked_24 else R.drawable.ic_like_24)
             likes.setOnClickListener {
-                onLikeListener(post)
+                onLikeClick(post)
             }
             reposts.setOnClickListener {
-                onRepostListener(post)
+                onRepostClick(post)
             }
         }
     }
