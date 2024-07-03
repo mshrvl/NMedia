@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.data.observe(this) { posts ->
             adapter.submitList(posts)
         }
-
+//тест
     }
 
 }
