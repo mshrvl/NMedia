@@ -10,8 +10,8 @@ class MainActivity : AppCompatActivity() {
     private val viewModel: MainViewModel by viewModels()
 
     private val adapter = PostsAdapter(
-        onLikeClick = {viewModel.like(it.id)},
-        onRepostClick = {viewModel.repost(it.id)}
+        onLikeClick = { viewModel.like(it.id) },
+        onRepostClick = { viewModel.repost(it.id) }
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,9 +24,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.data.observe(this) { posts ->
             adapter.submitList(posts)
         }
-//тест
     }
-
 }
 
 
