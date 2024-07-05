@@ -37,8 +37,9 @@ class PostViewHolder(val view: PostBinding, val onLikeClick: OnLikeListener, val
 }
 typealias OnLikeListener = (post: Post) -> Unit
 typealias OnRepostListener = (post: Post) -> Unit
+typealias OnRemoveListener = (post: Post) -> Unit
 
-class PostsAdapter(private val onLikeClick: OnLikeListener, private val onRepostClick: OnRepostListener): ListAdapter<Post, PostViewHolder>(PostDiffCallback()) {
+class PostsAdapter(private val onLikeClick: OnLikeListener, private val onRepostClick: OnRepostListener,  private val onRemoveListener : OnRemoveListener): ListAdapter<Post, PostViewHolder>(PostDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         val binding = PostBinding.inflate(LayoutInflater.from(parent.context), parent, false)

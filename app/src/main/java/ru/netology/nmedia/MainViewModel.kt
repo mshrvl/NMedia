@@ -6,4 +6,5 @@ class MainViewModel(private val repository: PostRepository = PostRepositoryInMem
     val data = repository.getPosts()
     fun like(id: Long) = repository.likeById(id)
     fun repost(id: Long) = repository.repost(id)
+    fun removeById(id: Long) = repository.removeById(id)
 }
