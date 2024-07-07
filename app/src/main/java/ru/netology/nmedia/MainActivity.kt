@@ -11,7 +11,8 @@ class MainActivity : AppCompatActivity() {
 
     private val adapter = PostsAdapter(
         onLikeClick = { viewModel.like(it.id) },
-        onRepostClick = { viewModel.repost(it.id) }
+        onRepostClick = { viewModel.repost(it.id) },
+        onRemoveListener = {viewModel.removeById(it.id)}
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {

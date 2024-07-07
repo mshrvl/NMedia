@@ -2,13 +2,14 @@ package ru.netology.nmedia
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import ru.netology.nmedia.databinding.PostBinding
 import ru.netology.nmedia.dto.Post
 
-class PostViewHolder(val view: PostBinding, val onLikeClick: OnLikeListener, val onRepostClick: OnRepostListener) : RecyclerView.ViewHolder(view.root) {
+class PostViewHolder(val view: PostBinding, val onLikeClick: OnLikeListener, val onRepostClick: OnRepostListener, val onRemoveListener: OnRemoveListener) : RecyclerView.ViewHolder(view.root) {
     fun bind(post: Post) {
         view.apply {
             author.text = post.author
@@ -23,7 +24,22 @@ class PostViewHolder(val view: PostBinding, val onLikeClick: OnLikeListener, val
             reposts.setOnClickListener {
                 onRepostClick(post)
             }
+            menu.setOnClickListener {
+                PopupMenu(it.context, it).apply {
+                    inflate(R.menu.options_post)
+                    setOnMenuItemClickListener { item ->
+                        when(item.itemId) {
+                            R.id.remove -> {
+                                onRemoveListener(post)
+                                true
+                            }
+                            else -> false
+                        }
+                    }
+                } .show()
+            }
         }
+    }
     }
 
     private fun formatNumber(number: Int): String {
@@ -34,16 +50,16 @@ class PostViewHolder(val view: PostBinding, val onLikeClick: OnLikeListener, val
             else -> number.toString()
         }
     }
-}
+
 typealias OnLikeListener = (post: Post) -> Unit
 typealias OnRepostListener = (post: Post) -> Unit
 typealias OnRemoveListener = (post: Post) -> Unit
 
-class PostsAdapter(private val onLikeClick: OnLikeListener, private val onRepostClick: OnRepostListener,  private val onRemoveListener : OnRemoveListener): ListAdapter<Post, PostViewHolder>(PostDiffCallback()) {
+class PostsAdapter(private val onLikeClick: OnLikeListener, private val onRepostClick: OnRepostListener,  private val onRemoveListener: OnRemoveListener): ListAdapter<Post, PostViewHolder>(PostDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         val binding = PostBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return PostViewHolder(binding, onLikeClick, onRepostClick)
+        return PostViewHolder(binding, onLikeClick, onRepostClick, onRemoveListener)
     }
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {

@@ -9,10 +9,12 @@ interface PostRepository {
     fun likeById(id: Long)
     fun repost(id: Long)
     fun removeById(id: Long)
+//    fun save(post: Post)
 }
 
 class PostRepositoryInMemoryImpl : PostRepository {
-    private var data = MutableLiveData(
+    //val edited = MutableLiveData(empty)
+    private val data = MutableLiveData(
         listOf(
             Post(
                 id = 1,
@@ -108,6 +110,20 @@ class PostRepositoryInMemoryImpl : PostRepository {
     }
 
     override fun removeById(id: Long) {
-        data.value = data.value?.filter{ it.id != id}
+        data.value = data.value?.filter { it.id != id }
     }
 }
+//    override fun save(post: Post) {
+//        posts = listOf(
+//            post.copy(
+//                id = id++,
+//                author = "Me",
+//                likedByMe = false,
+//                published = "now",
+//            )
+//        ) +post
+//        data.value = post
+//        return
+//    }
+//}
+
