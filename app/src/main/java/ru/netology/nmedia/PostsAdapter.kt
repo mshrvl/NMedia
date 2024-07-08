@@ -9,7 +9,17 @@ import androidx.recyclerview.widget.RecyclerView
 import ru.netology.nmedia.databinding.PostBinding
 import ru.netology.nmedia.dto.Post
 
-class PostViewHolder(val view: PostBinding, val onLikeClick: OnLikeListener, val onRepostClick: OnRepostListener, val onRemoveListener: OnRemoveListener) : RecyclerView.ViewHolder(view.root) {
+interface OnInteractionListener {
+    fun onLike(post: Post)
+    fun onRemove(post: Post)
+    fun onRepost(post: Post)
+    fun onEdit(post: Post)
+}
+
+class PostViewHolder(
+    val view: PostBinding,
+    val onInteractionListener: OnInteractionListener
+) : RecyclerView.ViewHolder(view.root) {
     fun bind(post: Post) {
         view.apply {
             author.text = post.author
@@ -19,47 +29,54 @@ class PostViewHolder(val view: PostBinding, val onLikeClick: OnLikeListener, val
             repostsnumber.text = formatNumber(post.repostsN)
             likes.setImageResource(if (post.likedByMe) R.drawable.ic_liked_24 else R.drawable.ic_like_24)
             likes.setOnClickListener {
-                onLikeClick(post)
+                onInteractionListener.onLike(post)
             }
             reposts.setOnClickListener {
-                onRepostClick(post)
+                onInteractionListener.onRepost(post)
             }
             menu.setOnClickListener {
                 PopupMenu(it.context, it).apply {
                     inflate(R.menu.options_post)
                     setOnMenuItemClickListener { item ->
-                        when(item.itemId) {
+                        when (item.itemId) {
                             R.id.remove -> {
-                                onRemoveListener(post)
+                                onInteractionListener.onRemove(post)
+                                true
+                            }
+                            R.id.edit -> {
+                                onInteractionListener.onEdit(post)
                                 true
                             }
                             else -> false
                         }
                     }
-                } .show()
+                }.show()
             }
         }
     }
+}
+
+private fun formatNumber(number: Int): String {
+    return when {
+        number >= 1_000 && number < 10_000 -> "${number / 1_000}.${(number / 100) % 10}K"
+        number >= 10_000 && number < 100_000 -> "${number / 1_000}K"
+        number >= 100_000 && number < 1_000_000 -> "${number / 10_000}.${(number % 10_000) / 1_000}M"
+        else -> number.toString()
     }
+} // возможно надо немножко отрефачить :(
 
-    private fun formatNumber(number: Int): String {
-        return when {
-            number >= 1_000 && number < 10_000 -> "${number / 1_000}.${(number / 100) % 10}K"
-            number >= 10_000 && number < 100_000 -> "${number / 1_000}K"
-            number >= 100_000 && number < 1_000_000 -> "${number / 10_000}.${(number % 10_000) / 1_000}M"
-            else -> number.toString()
-        }
-    }
 
-typealias OnLikeListener = (post: Post) -> Unit
-typealias OnRepostListener = (post: Post) -> Unit
-typealias OnRemoveListener = (post: Post) -> Unit
+//typealias OnLikeListener = (post: Post) -> Unit
+//typealias OnRepostListener = (post: Post) -> Unit
+//typealias OnRemoveListener = (post: Post) -> Unit
 
-class PostsAdapter(private val onLikeClick: OnLikeListener, private val onRepostClick: OnRepostListener,  private val onRemoveListener: OnRemoveListener): ListAdapter<Post, PostViewHolder>(PostDiffCallback()) {
+class PostsAdapter(
+    val onInteractionListener: OnInteractionListener
+) : ListAdapter<Post, PostViewHolder>(PostDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         val binding = PostBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return PostViewHolder(binding, onLikeClick, onRepostClick, onRemoveListener)
+        return PostViewHolder(view = binding, onInteractionListener = onInteractionListener)
     }
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
@@ -67,7 +84,8 @@ class PostsAdapter(private val onLikeClick: OnLikeListener, private val onRepost
         holder.bind(post)
     }
 }
-class PostDiffCallback: DiffUtil.ItemCallback<Post>(){
+
+class PostDiffCallback : DiffUtil.ItemCallback<Post>() {
     override fun areItemsTheSame(oldItem: Post, newItem: Post): Boolean {
         return oldItem.id == newItem.id
     }
