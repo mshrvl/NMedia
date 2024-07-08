@@ -16,7 +16,6 @@ interface PostRepository {
 
 
 class PostRepositoryInMemoryImpl : PostRepository {
-    var edited = MutableLiveData(empty)
     private val data = MutableLiveData(
         listOf(
             Post(

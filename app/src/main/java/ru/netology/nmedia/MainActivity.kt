@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity() {
                     ).show()
                     return@setOnClickListener
                 }
-//                viewModel.changeContent(this?.text.toString())
+                viewModel.changeContent(this?.text.toString())
                 viewModel.save(this?.text?.toString() ?: "")
                 this?.let { editText ->
                     editText.setText("")
