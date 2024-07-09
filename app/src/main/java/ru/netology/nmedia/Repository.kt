@@ -14,7 +14,6 @@ interface PostRepository {
     fun edit(post: Post)
 }
 
-
 class PostRepositoryInMemoryImpl : PostRepository {
     private val data = MutableLiveData(
         listOf(
@@ -117,7 +116,7 @@ class PostRepositoryInMemoryImpl : PostRepository {
 
     override fun save(post: Post) {
         data.value?.let {
-            val lastId = it.map { it.id }.maxOrNull() ?: 0
+            val lastId = it.map {it.id}.maxOrNull() ?: 0
             data.value = it + post.copy(
                 id = lastId + 1,
                 author = "You",
@@ -128,13 +127,14 @@ class PostRepositoryInMemoryImpl : PostRepository {
     }
 
     override fun edit(post: Post) {
-        data.value?.let {
+        data.value?.let { it ->
             data.value = it.map {
                 if (it.id == post.id) post else it
             }
         }
     }
 }
+
 
 
 

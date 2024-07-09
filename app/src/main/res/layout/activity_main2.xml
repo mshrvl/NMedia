@@ -21,10 +21,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="top"
-        app:constraint_referenced_ids="content,save" />
+        app:constraint_referenced_ids="text_field,save" />
 
     <EditText
-        android:id="@+id/content"
+        android:id="@+id/text_field"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/post_text"
@@ -46,7 +46,7 @@
         android:background="@android:color/transparent"
         android:contentDescription="@string/description_post_like"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/content"
+        app:layout_constraintStart_toEndOf="@id/text_field"
         app:layout_constraintBottom_toBottomOf="parent"
         app:srcCompat="@drawable/ic_save_48"
         />

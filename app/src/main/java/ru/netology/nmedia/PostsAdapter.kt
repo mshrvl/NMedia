@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import ru.netology.nmedia.databinding.PostBinding
 import ru.netology.nmedia.dto.Post
 
+
 interface OnInteractionListener {
     fun onLike(post: Post)
     fun onRemove(post: Post)
@@ -24,7 +25,7 @@ class PostViewHolder(
         view.apply {
             author.text = post.author
             published.text = post.published
-            content.text = post.content
+            textField.text = post.content
             likesnumber.text = formatNumber(post.likes)
             repostsnumber.text = formatNumber(post.repostsN)
             likes.setImageResource(if (post.likedByMe) R.drawable.ic_liked_24 else R.drawable.ic_like_24)
@@ -65,11 +66,6 @@ private fun formatNumber(number: Int): String {
     }
 } // возможно надо немножко отрефачить :(
 
-
-//typealias OnLikeListener = (post: Post) -> Unit
-//typealias OnRepostListener = (post: Post) -> Unit
-//typealias OnRemoveListener = (post: Post) -> Unit
-
 class PostsAdapter(
     val onInteractionListener: OnInteractionListener
 ) : ListAdapter<Post, PostViewHolder>(PostDiffCallback()) {
@@ -94,3 +90,4 @@ class PostDiffCallback : DiffUtil.ItemCallback<Post>() {
         return oldItem == newItem
     }
 }
+

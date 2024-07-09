@@ -10,7 +10,6 @@ class MainViewModel(private val repository: PostRepository = PostRepositoryInMem
     fun like(id: Long) = repository.likeById(id)
     fun repost(id: Long) = repository.repost(id)
     fun removeById(id: Long) = repository.removeById(id)
-    //fun edit(post: Post) = repository.edit(post)
     val edited = MutableLiveData(empty)
 
     fun save(content: String) {
@@ -24,21 +23,13 @@ class MainViewModel(private val repository: PostRepository = PostRepositoryInMem
         edited.value = empty
     }
 
-    fun changeContent(content: String) {
-        edited.value?.let {
-            val text = content.trim()
-            if (it.content == text) {
-                return
-            }
-            edited.value = empty.copy(content = content)
-        }
-    }
     fun edit(post: Post) {
         edited.value = post
     }
 }
 
-var empty = Post(
+
+val empty = Post(
     id = 0,
     content = "",
     author = "",
