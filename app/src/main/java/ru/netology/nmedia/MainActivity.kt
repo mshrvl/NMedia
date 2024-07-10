@@ -82,6 +82,7 @@ class MainActivity : AppCompatActivity() {
             binding.textField.setText("")
             binding.textField.clearFocus()
             binding.group.visibility = View.GONE
+            viewModel.cancelEdit()
         }
     }
 }
