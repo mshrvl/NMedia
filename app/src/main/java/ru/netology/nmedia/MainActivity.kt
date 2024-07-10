@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import ru.netology.nmedia.databinding.ActivityMainBinding
 import ru.netology.nmedia.dto.Post
 
-
 class MainActivity : AppCompatActivity() {
     private val viewModel: MainViewModel by viewModels()
 
@@ -32,8 +31,7 @@ class MainActivity : AppCompatActivity() {
         override fun onRepost(post: Post) {
             viewModel.repost(post.id)
         }
-    }
-    )
+    })
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,21 +39,24 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         binding.group.visibility = View.GONE
         val manager = LinearLayoutManager(this)
+
         binding.postsList.adapter = adapter
         binding.postsList.layoutManager = manager
-
         viewModel.data.observe(this) { posts ->
             adapter.submitList(posts)
         }
         viewModel.edited.observe(this@MainActivity) { post ->
             if (post.id == 0L) {
+                binding.group.visibility = View.GONE
                 return@observe
             }
+            binding.group.visibility = View.VISIBLE
             with(binding.textField) {
                 requestFocus()
                 setText(post.content)
             }
         }
+
         binding.save.setOnClickListener {
             with(binding.textField) {
                 if (text.isNullOrBlank()) {
@@ -71,6 +72,8 @@ class MainActivity : AppCompatActivity() {
                     editText.setText("")
                     editText.clearFocus()
                     this@MainActivity.hideKeyboard(editText)
+                    binding.group.visibility = View.GONE
+
                 }
             }
         }
@@ -78,16 +81,17 @@ class MainActivity : AppCompatActivity() {
             hideKeyboard(binding.root)
             binding.textField.setText("")
             binding.textField.clearFocus()
-        }
+            binding.group.visibility = View.GONE
         }
     }
+}
 
 
-    fun Context.hideKeyboard(view: View) {
-        val inputMethodManager =
-            getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
-    }
+fun Context.hideKeyboard(view: View) {
+    val inputMethodManager =
+        getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+    inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+}
 
 
 
