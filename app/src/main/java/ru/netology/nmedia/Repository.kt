@@ -5,9 +5,13 @@ import androidx.lifecycle.MutableLiveData
 import ru.netology.nmedia.dto.Post
 
 interface PostRepository {
+
     fun getPosts(): LiveData<List<Post>>
     fun likeById(id: Long)
     fun repost(id: Long)
+    fun removeById(id: Long)
+    fun save(post: Post)
+    fun edit(post: Post)
 }
 
 class PostRepositoryInMemoryImpl : PostRepository {
@@ -105,4 +109,33 @@ class PostRepositoryInMemoryImpl : PostRepository {
             data.value = newList
         }
     }
+
+    override fun removeById(id: Long) {
+        data.value = data.value?.filter { it.id != id }
+    }
+
+    override fun save(post: Post) {
+        data.value?.let {
+            val lastId = it.map {it.id}.maxOrNull() ?: 0
+            data.value = it + post.copy(
+                id = lastId + 1,
+                author = "You",
+                published = "few seconds ago"
+            )
+        }
+
+    }
+
+    override fun edit(post: Post) {
+        data.value?.let { it ->
+            data.value = it.map {
+                if (it.id == post.id) post else it
+            }
+        }
+    }
 }
+
+
+
+
+
