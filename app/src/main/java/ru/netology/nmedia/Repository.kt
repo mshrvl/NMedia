@@ -117,11 +117,11 @@ class PostRepositoryInMemoryImpl : PostRepository {
     override fun save(post: Post) {
         data.value?.let {
             val lastId = it.map {it.id}.maxOrNull() ?: 0
-            data.value = it + post.copy(
+            data.value = listOf(post.copy(
                 id = lastId + 1,
                 author = "You",
                 published = "few seconds ago"
-            )
+            )) + it
         }
 
     }

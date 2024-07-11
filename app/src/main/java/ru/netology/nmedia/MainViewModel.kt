@@ -26,6 +26,10 @@ class MainViewModel(private val repository: PostRepository = PostRepositoryInMem
     fun edit(post: Post) {
         edited.value = post
     }
+
+    fun cancelEdit() {
+        edited.value = empty
+    }
 }
 
 
