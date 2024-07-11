@@ -11,6 +11,7 @@
         android:id="@+id/avatar"
         android:layout_width="61dp"
         android:layout_height="59dp"
+        android:contentDescription="Аватар пользователя"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/post_avatar_drawable" />
@@ -57,7 +58,7 @@
         app:constraint_referenced_ids="avatar,published,menu" />
 
     <TextView
-        android:id="@+id/content"
+        android:id="@+id/text_field"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -77,7 +78,7 @@
         app:layout_constraintEnd_toStartOf="@+id/likesnumber"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/content"
+        app:layout_constraintTop_toBottomOf="@+id/text_field"
         app:srcCompat="@drawable/ic_like_24" />
 
     <ImageButton
@@ -90,7 +91,7 @@
         app:layout_constraintEnd_toStartOf="@+id/repostsnumber"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@id/likesnumber"
-        app:layout_constraintTop_toBottomOf="@+id/content"
+        app:layout_constraintTop_toBottomOf="@+id/text_field"
         app:srcCompat="@drawable/ic_share_24" />
 
     <ImageButton
@@ -99,7 +100,7 @@
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/content"
+        app:layout_constraintTop_toBottomOf="@+id/text_field"
         app:srcCompat="@drawable/c_views_24" />
 
     <TextView
@@ -110,7 +111,7 @@
         android:layout_marginTop="4dp"
         android:text="10"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/content" />
+        app:layout_constraintTop_toBottomOf="@+id/text_field" />
 
     <TextView
         android:id="@+id/repostsnumber"
@@ -120,7 +121,7 @@
         android:layout_marginTop="4dp"
         android:text="15"
         app:layout_constraintStart_toEndOf="@+id/reposts"
-        app:layout_constraintTop_toBottomOf="@+id/content" />
+        app:layout_constraintTop_toBottomOf="@+id/text_field" />
 
     <TextView
         android:id="@+id/viewsnumber"
@@ -129,7 +130,7 @@
         android:layout_marginEnd="32dp"
         android:text="15"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/content" />
+        app:layout_constraintTop_toBottomOf="@+id/text_field" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
