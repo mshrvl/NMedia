@@ -75,18 +75,17 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:background="@android:color/transparent"
-        app:layout_constraintEnd_toStartOf="@+id/likesnumber"
-        app:layout_constraintHorizontal_bias="0.468"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_field"
         android:button="@drawable/ic_like_24dp"
-        />
+        app:layout_constraintEnd_toStartOf="@+id/likesnumber"
+        app:layout_constraintHorizontal_bias="0.25"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_field" />
 
     <ImageButton
         android:id="@+id/reposts"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="8dp"
         android:background="@android:color/transparent"
         app:layout_constraintEnd_toStartOf="@+id/repostsnumber"
@@ -102,14 +101,15 @@
         android:background="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_field"
-        app:srcCompat="@drawable/c_views_24" />
+        app:srcCompat="@drawable/c_views_24"
+        android:layout_marginTop="14dp"/>
 
     <TextView
         android:id="@+id/likesnumber"
         android:layout_width="wrap_content"
         android:layout_height="18dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop= "14dp"
         android:text="10"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_field" />
@@ -118,8 +118,8 @@
         android:id="@+id/repostsnumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="14dp"
         android:text="15"
         app:layout_constraintStart_toEndOf="@+id/reposts"
         app:layout_constraintTop_toBottomOf="@+id/text_field" />
@@ -128,7 +128,8 @@
         android:id="@+id/viewsnumber"
         android:layout_width="17dp"
         android:layout_height="24dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="24dp"
         android:text="15"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_field" />
