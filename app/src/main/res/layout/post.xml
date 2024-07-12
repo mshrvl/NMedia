@@ -40,15 +40,16 @@
         app:layout_constraintEnd_toStartOf="@id/menu"
         android:layout_marginStart="16dp"/>
 
+
     <ImageButton
         android:id="@+id/menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
         android:background="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/avatar"
         app:srcCompat="@drawable/ic_more_vert_24" />
-
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrier"
@@ -69,17 +70,18 @@
         app:layout_constraintTop_toBottomOf="@id/barrier"
         tools:text="@sample/posts.json/data/content" />
 
-    <com.google.android.material.checkbox.MaterialCheckBox
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/likes"
+        style="@style/Widget.AppTheme.LikeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:background="@android:color/transparent"
-        android:button="@drawable/ic_like_24dp"
-        app:layout_constraintEnd_toStartOf="@+id/likesnumber"
-        app:layout_constraintHorizontal_bias="0.25"
+        android:layout_marginTop="1dp"
+        android:checkable="true"
+        android:contentDescription="@string/description_post_like"
+        app:icon="@drawable/ic_like_24dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_field" />
+        app:layout_constraintTop_toBottomOf="@+id/text_field"
+        />
 
     <ImageButton
         android:id="@+id/reposts"
@@ -120,7 +122,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginTop="14dp"
-        android:text="15"
+        android:text="4"
         app:layout_constraintStart_toEndOf="@+id/reposts"
         app:layout_constraintTop_toBottomOf="@+id/text_field" />
 
