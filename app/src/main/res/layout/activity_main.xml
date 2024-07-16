@@ -70,7 +70,6 @@
         android:background="@color/white"
         android:elegantTextHeight="true"
         android:text="@string/editing_post"
-        android:textColor="@color/blue"
         android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="@+id/posts_list"
         app:layout_constraintEnd_toStartOf="@+id/cancel_change"
