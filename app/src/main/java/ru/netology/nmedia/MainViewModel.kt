@@ -10,6 +10,7 @@ class MainViewModel(private val repository: PostRepository = PostRepositoryInMem
     fun like(id: Long) = repository.likeById(id)
     fun repost(id: Long) = repository.repost(id)
     fun removeById(id: Long) = repository.removeById(id)
+    fun onShare(post: Post) = repository.onShare(post)
     val edited = MutableLiveData(empty)
 
     fun save(content: String) {

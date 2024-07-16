@@ -1,5 +1,6 @@
 package ru.netology.nmedia
 
+import android.content.Intent
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import ru.netology.nmedia.dto.Post
@@ -12,6 +13,7 @@ interface PostRepository {
     fun removeById(id: Long)
     fun save(post: Post)
     fun edit(post: Post)
+    fun onShare(post: Post)
 }
 
 class PostRepositoryInMemoryImpl : PostRepository {
@@ -133,6 +135,15 @@ class PostRepositoryInMemoryImpl : PostRepository {
             }
         }
     }
+
+    override fun onShare(post: Post) {
+        val intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, post.content)
+            type = "text/plain"
+        }
+    }
+
 }
 
 
