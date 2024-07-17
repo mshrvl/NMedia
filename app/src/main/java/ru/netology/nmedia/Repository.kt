@@ -1,6 +1,5 @@
 package ru.netology.nmedia
 
-import android.content.Intent
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import ru.netology.nmedia.dto.Post
@@ -118,7 +117,7 @@ class PostRepositoryInMemoryImpl : PostRepository {
 
     override fun save(post: Post) {
         data.value?.let {
-            val lastId = it.map {it.id}.maxOrNull() ?: 0
+            val lastId = it.maxOfOrNull { it.id } ?: 0
             data.value = listOf(post.copy(
                 id = lastId + 1,
                 author = "You",
@@ -137,13 +136,8 @@ class PostRepositoryInMemoryImpl : PostRepository {
     }
 
     override fun onShare(post: Post) {
-        val intent = Intent().apply {
-            action = Intent.ACTION_SEND
-            putExtra(Intent.EXTRA_TEXT, post.content)
-            type = "text/plain"
-        }
+        TODO("Not yet implemented")
     }
-
 }
 
 

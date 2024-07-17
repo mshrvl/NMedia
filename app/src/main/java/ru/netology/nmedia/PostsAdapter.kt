@@ -13,8 +13,8 @@ import ru.netology.nmedia.dto.Post
 interface OnInteractionListener {
     fun onLike(post: Post)
     fun onRemove(post: Post)
-    fun onRepost(post: Post)
     fun onEdit(post: Post)
+    fun onShare(post: Post)
 }
 
 class PostViewHolder(
@@ -35,7 +35,7 @@ class PostViewHolder(
                 onInteractionListener.onLike(post)
             }
             reposts.setOnClickListener {
-                onInteractionListener.onRepost(post)
+                onInteractionListener.onShare(post)
             }
             menu.setOnClickListener {
                 PopupMenu(it.context, it).apply {

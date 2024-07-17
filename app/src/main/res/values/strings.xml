@@ -14,4 +14,5 @@
     <string name="cancel_edit">Отмена редактирования</string>
     <string name="editing_post">Редактирование поста</string>
     <string name="chooser_share_post">Поделиться</string>
+    <string name="ok">ок</string>
 </resources>
