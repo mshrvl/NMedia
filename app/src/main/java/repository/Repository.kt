@@ -1,4 +1,4 @@
-package ru.netology.nmedia
+package repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -12,7 +12,6 @@ interface PostRepository {
     fun removeById(id: Long)
     fun save(post: Post)
     fun edit(post: Post)
-    fun onShare(post: Post)
 }
 
 class PostRepositoryInMemoryImpl : PostRepository {
@@ -133,10 +132,6 @@ class PostRepositoryInMemoryImpl : PostRepository {
                 if (it.id == post.id) post else it
             }
         }
-    }
-
-    override fun onShare(post: Post) {
-        TODO("Not yet implemented")
     }
 }
 

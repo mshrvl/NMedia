@@ -1,5 +1,7 @@
-package ru.netology.nmedia
+package activity
 
+import adapter.OnInteractionListener
+import adapter.PostsAdapter
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -7,9 +9,12 @@ import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.activity.result.launch
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import ru.netology.nmedia.MainViewModel
+import ru.netology.nmedia.R
 import ru.netology.nmedia.databinding.ActivityMainBinding
 import ru.netology.nmedia.dto.Post
 
@@ -46,6 +51,7 @@ class MainActivity : AppCompatActivity() {
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.group.visibility = View.GONE
+        binding.fab?.visibility = View.VISIBLE
         val manager = LinearLayoutManager(this)
 
         binding.postsList.adapter = adapter
@@ -53,11 +59,22 @@ class MainActivity : AppCompatActivity() {
         viewModel.data.observe(this) { posts ->
             adapter.submitList(posts)
         }
+       val newPostLauncher = registerForActivityResult(NewPostResultContract()) { result ->
+            result ?: return@registerForActivityResult
+            viewModel.changeContent(result)
+            viewModel.save(result)
+        }
+        binding.fab?.setOnClickListener {
+            newPostLauncher.launch()
+        }
+
         viewModel.edited.observe(this@MainActivity) { post ->
             if (post.id == 0L) {
                 binding.group.visibility = View.GONE
+                binding.fab?.visibility = View.VISIBLE
                 return@observe
             }
+            binding.fab?.visibility = View.GONE
             binding.group.visibility = View.VISIBLE
             with(binding.textField) {
                 requestFocus()
@@ -81,15 +98,18 @@ class MainActivity : AppCompatActivity() {
                     editText.clearFocus()
                     this@MainActivity.hideKeyboard(editText)
                     binding.group.visibility = View.GONE
+                    binding.fab?.visibility = View.VISIBLE
 
                 }
             }
+
         }
         binding.cancelChange.setOnClickListener {
             hideKeyboard(binding.root)
             binding.textField.setText("")
             binding.textField.clearFocus()
             binding.group.visibility = View.GONE
+            binding.fab?.visibility = View.VISIBLE
             viewModel.cancelEdit()
         }
 
