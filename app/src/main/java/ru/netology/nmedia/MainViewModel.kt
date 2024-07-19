@@ -38,6 +38,8 @@ class MainViewModel(private val repository: PostRepository = PostRepositoryInMem
         }
         edited.value = edited.value?.copy(content = text)
     }
+
+
 }
 
 

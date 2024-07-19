@@ -41,17 +41,6 @@
         android:layout_marginStart="16dp"/>
 
 
-<!--    <ImageButton-->
-<!--        android:id="@+id/menu"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="12dp"-->
-<!--        android:background="@android:color/transparent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="@+id/avatar"-->
-<!--        app:srcCompat="@drawable/ic_more_vert_24" />-->
-
-
     <com.google.android.material.button.MaterialButton
         android:id="@+id/menu"
         android:layout_width="24dp"

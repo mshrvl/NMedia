@@ -29,6 +29,9 @@
                 <data android:mimeType="text/plain"/>
             </intent-filter>
         </activity>
+        <activity android:name="activity.EditPostActivity"
+            android:exported="false">
+        </activity>
 
         <activity android:name="activity.NewPostActivity"
             android:exported="false">

@@ -47,7 +47,7 @@ class PostViewHolder(
                                 onInteractionListener.onRemove(post)
                                 true
                             }
-                            R.id.edit -> {
+                            R.id.edit_content -> {
                                 onInteractionListener.onEdit(post)
                                 true
                             }
