@@ -11,18 +11,20 @@ import androidx.appcompat.app.AppCompatActivity
 import ru.netology.nmedia.MainViewModel
 import ru.netology.nmedia.databinding.ActivityEditPostBinding
 
-
 class EditPostActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityEditPostBinding.inflate(layoutInflater)
         val viewModel: MainViewModel by viewModels()
-        val postContent = intent.getStringExtra(Intent.EXTRA_TEXT)
+        setContentView(binding.root)
 
-        binding.group.visibility = View.VISIBLE
+        val postText = intent.getStringExtra(Intent.EXTRA_TEXT)
+        binding.postText.setText(postText)
+
 
         binding.save.setOnClickListener {
-            with(binding.textField) {
+            val newText = binding.postText.text.toString()
+            with(binding.postText) {
                 if (text.isNullOrBlank()) {
                     android.widget.Toast.makeText(
                         this@EditPostActivity,
@@ -36,18 +38,24 @@ class EditPostActivity : AppCompatActivity() {
                     editText.setText("")
                     editText.clearFocus()
                     this@EditPostActivity.hideKeyboard(editText)
-                    //binding.group.visibility = android.view.View.GONE
                 }
+                val resultIntent = Intent().apply {
+                    putExtra(Intent.EXTRA_TEXT, newText)
+                }
+                setResult(Activity.RESULT_OK, resultIntent)
+                finish()
             }
+
         }
         binding.cancelChange.setOnClickListener {
             hideKeyboard(binding.root)
-            binding.textField.setText("")
-            binding.textField.clearFocus()
+            binding.postText.setText("")
+            binding.postText.clearFocus()
             //binding.group.visibility = View.GONE
             viewModel.cancelEdit()
+            finish()
         }
-        finish()
+
     }
     private fun Context.hideKeyboard(view: View) {
         val inputMethodManager =

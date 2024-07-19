@@ -37,7 +37,6 @@ class MainActivity : AppCompatActivity() {
         override fun onEdit(post: Post) {
             viewModel.edit(post)
             editPostLauncher.launch(post.content)
-
         }
 
         override fun onRemove(post: Post) {
@@ -72,17 +71,11 @@ class MainActivity : AppCompatActivity() {
         binding.fab?.setOnClickListener {
             newPostLauncher.launch()
         }
-        val editPostLauncher = registerForActivityResult(EditPostResultContract()) { result ->
-            result ?: return@registerForActivityResult
-            viewModel.changeContent(result)
-            viewModel.save(result)
-        }
 
         viewModel.edited.observe(this) {
             if (it.id == 0L) {
                 return@observe
             }
-            editPostLauncher.launch(it.content)
         }
     }
 }
