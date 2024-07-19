@@ -13,6 +13,7 @@ class MainViewModel(private val repository: PostRepository = PostRepositoryInMem
     fun removeById(id: Long) = repository.removeById(id)
     val edited = MutableLiveData(empty)
 
+
     fun save(content: String?) {
         edited.value?.let {
             if (it.id == 0L) {
@@ -39,6 +40,8 @@ class MainViewModel(private val repository: PostRepository = PostRepositoryInMem
         edited.value = edited.value?.copy(content = text)
     }
 
+    //fun video() = repository.video
+
 
 }
 
@@ -52,4 +55,5 @@ val empty = Post(
     published = "",
     repostsN = 0,
     repostByMe = false,
+    video = null
 )

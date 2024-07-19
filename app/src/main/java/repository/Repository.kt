@@ -12,6 +12,7 @@ interface PostRepository {
     fun removeById(id: Long)
     fun save(post: Post)
     fun edit(post: Post)
+    fun video(post: Post)
 }
 
 class PostRepositoryInMemoryImpl : PostRepository {
@@ -25,7 +26,8 @@ class PostRepositoryInMemoryImpl : PostRepository {
                 likes = 0,
                 likedByMe = false,
                 repostsN = 2131,
-                repostByMe = false
+                repostByMe = false,
+                video = null
             ),
             Post(
                 id = 2,
@@ -35,7 +37,9 @@ class PostRepositoryInMemoryImpl : PostRepository {
                 likes = 132,
                 likedByMe = false,
                 repostsN = 73,
-                repostByMe = false
+                repostByMe = false,
+                video = null
+
             ),
             Post(
                 id = 3,
@@ -45,7 +49,8 @@ class PostRepositoryInMemoryImpl : PostRepository {
                 likes = 182,
                 likedByMe = false,
                 repostsN = 51,
-                repostByMe = false
+                repostByMe = false,
+                video = null
             ),
             Post(
                 id = 4,
@@ -55,7 +60,8 @@ class PostRepositoryInMemoryImpl : PostRepository {
                 likes = 10,
                 likedByMe = false,
                 repostsN = 15,
-                repostByMe = false
+                repostByMe = false,
+                video = null
             ),
             Post(
                 id = 5,
@@ -65,7 +71,8 @@ class PostRepositoryInMemoryImpl : PostRepository {
                 likes = 132,
                 likedByMe = false,
                 repostsN = 73,
-                repostByMe = false
+                repostByMe = false,
+                video = null
             ),
             Post(
                 id = 6,
@@ -75,7 +82,8 @@ class PostRepositoryInMemoryImpl : PostRepository {
                 likes = 182,
                 likedByMe = false,
                 repostsN = 51,
-                repostByMe = false
+                repostByMe = false,
+                video = null
             )
         )
     )
@@ -132,6 +140,10 @@ class PostRepositoryInMemoryImpl : PostRepository {
                 if (it.id == post.id) post else it
             }
         }
+    }
+
+    override fun video(post: Post) {
+
     }
 }
 

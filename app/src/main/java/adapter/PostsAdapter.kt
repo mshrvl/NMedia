@@ -16,6 +16,7 @@ interface OnInteractionListener {
     fun onRemove(post: Post)
     fun onEdit(post: Post)
     fun onShare(post: Post)
+    fun onPlayVideo(post: Post)
 }
 
 class PostViewHolder(

@@ -53,6 +53,13 @@ class MainActivity : AppCompatActivity() {
                 Intent.createChooser(intent, getString(R.string.chooser_share_post))
             startActivity(shareIntent)
         }
+
+//
+            override fun onPlayVideo(post: Post) {
+//            viewModel.video()
+//            val videoIntent = Intent(Intent.ACTION_VIEW, Uri.parse(post.video))
+//            startActivity(videoIntent)
+        }
     })
 
     override fun onCreate(savedInstanceState: Bundle?) {
