@@ -32,6 +32,7 @@ class MainViewModel(private val repository: PostRepository = PostRepositoryInMem
     fun cancelEdit() {
         edited.value = empty
     }
+
     fun changeContent(content: String) {
         val text = content.trim()
         if (edited.value?.content == text) {
@@ -40,11 +41,10 @@ class MainViewModel(private val repository: PostRepository = PostRepositoryInMem
         edited.value = edited.value?.copy(content = text)
     }
 
-    //fun video() = repository.video
+    fun video() = repository.video()
 
 
 }
-
 
 val empty = Post(
     id = 0,

@@ -12,7 +12,7 @@ interface PostRepository {
     fun removeById(id: Long)
     fun save(post: Post)
     fun edit(post: Post)
-    fun video(post: Post)
+    fun video()
 }
 
 class PostRepositoryInMemoryImpl : PostRepository {
@@ -34,11 +34,11 @@ class PostRepositoryInMemoryImpl : PostRepository {
                 author = "Нетология",
                 published = "24 мая в 18:36",
                 content = "В посте мы разобрали проблемы современного глобального потепления",
-                likes = 132,
+                likes = 179,
                 likedByMe = false,
                 repostsN = 73,
                 repostByMe = false,
-                video = null
+                video = "https://www.youtube.com/watch?v=arUctP5yAYc"
 
             ),
             Post(
@@ -142,7 +142,8 @@ class PostRepositoryInMemoryImpl : PostRepository {
         }
     }
 
-    override fun video(post: Post) {
+    override fun video() {
+        data.value
 
     }
 }

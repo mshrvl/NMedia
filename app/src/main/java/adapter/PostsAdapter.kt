@@ -1,6 +1,7 @@
 package adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.DiffUtil
@@ -32,6 +33,15 @@ class PostViewHolder(
             reposts.text = formatNumber(post.repostsN)
             likes.isChecked = post.likedByMe
             reposts.isChecked = post.repostByMe
+            videoLink.text = post.video
+
+            if (post.video.isNullOrEmpty()) {
+                groupForVideo.visibility = View.VISIBLE
+            } else {
+                groupForVideo.visibility = View.GONE
+            }
+
+
 
             likes.setOnClickListener {
                 onInteractionListener.onLike(post)

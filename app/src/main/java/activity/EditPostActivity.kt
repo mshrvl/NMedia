@@ -51,12 +51,12 @@ class EditPostActivity : AppCompatActivity() {
             hideKeyboard(binding.root)
             binding.postText.setText("")
             binding.postText.clearFocus()
-            //binding.group.visibility = View.GONE
             viewModel.cancelEdit()
             finish()
         }
 
     }
+
     private fun Context.hideKeyboard(view: View) {
         val inputMethodManager =
             getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager

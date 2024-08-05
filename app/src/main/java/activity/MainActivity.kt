@@ -3,6 +3,7 @@ package activity
 import adapter.OnInteractionListener
 import adapter.PostsAdapter
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.activity.result.launch
 import androidx.activity.viewModels
@@ -19,14 +20,16 @@ class MainActivity : AppCompatActivity() {
 
     private val newPostLauncher = registerForActivityResult(NewPostResultContract()) { result ->
         result ?: return@registerForActivityResult
-        viewModel.changeContent(result)
         viewModel.save(result)
     }
 
     private val editPostLauncher = registerForActivityResult(EditPostResultContract()) { result ->
-        result ?: return@registerForActivityResult
-        viewModel.changeContent(result)
-        viewModel.save(result)
+        if (result != null) {
+            viewModel.changeContent(result)
+            viewModel.save(result)
+        }
+        viewModel.cancelEdit()
+
     }
 
     private val adapter = PostsAdapter(onInteractionListener = object : OnInteractionListener {
@@ -54,11 +57,11 @@ class MainActivity : AppCompatActivity() {
             startActivity(shareIntent)
         }
 
-//
+
             override fun onPlayVideo(post: Post) {
-//            viewModel.video()
-//            val videoIntent = Intent(Intent.ACTION_VIEW, Uri.parse(post.video))
-//            startActivity(videoIntent)
+            viewModel.video()
+            val videoIntent = Intent(Intent.ACTION_VIEW, Uri.parse(post.video))
+            startActivity(videoIntent)
         }
     })
 

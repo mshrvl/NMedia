@@ -119,5 +119,47 @@
         android:clickable="false"
         android:enabled="false"/>
 
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_for_video"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="video_link, play_video" />
+
+    <TextView
+        android:id="@+id/video_link"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:autoLink="web"
+        android:singleLine="true"
+        android:text="linklinklink"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_field" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/play_video"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/post_avatar_drawable"
+        android:checkable="false"
+        app:icon="@drawable/play_video"
+        android:autoLink="web"
+        app:iconGravity="textStart"
+        app:layout_constraintBottom_toTopOf="@id/video_link"
+        app:layout_constraintEnd_toEndOf="@id/text_field"
+        app:layout_constraintStart_toStartOf="@id/text_field"
+        app:layout_constraintTop_toBottomOf="@id/text_field" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/video_barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="top"
+        app:constraint_referenced_ids="video_link, play_video" />
+
+
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
