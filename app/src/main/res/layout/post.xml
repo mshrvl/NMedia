@@ -90,7 +90,6 @@
             android:background="@drawable/photo"
             android:checkable="false"
             app:icon="@drawable/play_video"
-            android:clickable="true"
             />
 
         <ImageView
@@ -100,7 +99,6 @@
             android:src="@drawable/play_video"
             android:layout_centerInParent="true"
             app:tint="@android:color/white"
-            android:clickable="true"
             />
 
         <TextView
