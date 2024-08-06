@@ -1,11 +1,13 @@
-package ru.netology.nmedia
+package adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import ru.netology.nmedia.R
 import ru.netology.nmedia.databinding.PostBinding
 import ru.netology.nmedia.dto.Post
 
@@ -13,8 +15,9 @@ import ru.netology.nmedia.dto.Post
 interface OnInteractionListener {
     fun onLike(post: Post)
     fun onRemove(post: Post)
-    fun onRepost(post: Post)
     fun onEdit(post: Post)
+    fun onShare(post: Post)
+    fun onPlayVideo(post: Post)
 }
 
 class PostViewHolder(
@@ -30,12 +33,19 @@ class PostViewHolder(
             reposts.text = formatNumber(post.repostsN)
             likes.isChecked = post.likedByMe
             reposts.isChecked = post.repostByMe
+            videoLink.text = post.video
+
+            if (post.video.isNullOrEmpty()) {
+                groupForVideo.visibility = View.GONE
+            } else {
+                groupForVideo.visibility = View.VISIBLE
+            }
 
             likes.setOnClickListener {
                 onInteractionListener.onLike(post)
             }
             reposts.setOnClickListener {
-                onInteractionListener.onRepost(post)
+                onInteractionListener.onShare(post)
             }
             menu.setOnClickListener {
                 PopupMenu(it.context, it).apply {
@@ -46,14 +56,22 @@ class PostViewHolder(
                                 onInteractionListener.onRemove(post)
                                 true
                             }
-                            R.id.edit -> {
+
+                            R.id.edit_content -> {
                                 onInteractionListener.onEdit(post)
                                 true
                             }
+
                             else -> false
                         }
                     }
                 }.show()
+            }
+            previewVideo.setOnClickListener {
+                onInteractionListener.onPlayVideo(post)
+            }
+            playVideo.setOnClickListener {
+                onInteractionListener.onPlayVideo(post)
             }
         }
     }

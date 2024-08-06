@@ -1,4 +1,4 @@
-package ru.netology.nmedia
+package repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -12,6 +12,7 @@ interface PostRepository {
     fun removeById(id: Long)
     fun save(post: Post)
     fun edit(post: Post)
+    fun video()
 }
 
 class PostRepositoryInMemoryImpl : PostRepository {
@@ -25,17 +26,20 @@ class PostRepositoryInMemoryImpl : PostRepository {
                 likes = 0,
                 likedByMe = false,
                 repostsN = 2131,
-                repostByMe = false
+                repostByMe = false,
+                video = null
             ),
             Post(
                 id = 2,
                 author = "Нетология",
                 published = "24 мая в 18:36",
                 content = "В посте мы разобрали проблемы современного глобального потепления",
-                likes = 132,
+                likes = 179,
                 likedByMe = false,
                 repostsN = 73,
-                repostByMe = false
+                repostByMe = false,
+                video = "https://www.youtube.com/watch?v=arUctP5yAYc"
+
             ),
             Post(
                 id = 3,
@@ -45,7 +49,8 @@ class PostRepositoryInMemoryImpl : PostRepository {
                 likes = 182,
                 likedByMe = false,
                 repostsN = 51,
-                repostByMe = false
+                repostByMe = false,
+                video = null
             ),
             Post(
                 id = 4,
@@ -55,7 +60,8 @@ class PostRepositoryInMemoryImpl : PostRepository {
                 likes = 10,
                 likedByMe = false,
                 repostsN = 15,
-                repostByMe = false
+                repostByMe = false,
+                video = null
             ),
             Post(
                 id = 5,
@@ -65,7 +71,8 @@ class PostRepositoryInMemoryImpl : PostRepository {
                 likes = 132,
                 likedByMe = false,
                 repostsN = 73,
-                repostByMe = false
+                repostByMe = false,
+                video = null
             ),
             Post(
                 id = 6,
@@ -75,7 +82,8 @@ class PostRepositoryInMemoryImpl : PostRepository {
                 likes = 182,
                 likedByMe = false,
                 repostsN = 51,
-                repostByMe = false
+                repostByMe = false,
+                video = null
             )
         )
     )
@@ -116,7 +124,7 @@ class PostRepositoryInMemoryImpl : PostRepository {
 
     override fun save(post: Post) {
         data.value?.let {
-            val lastId = it.map {it.id}.maxOrNull() ?: 0
+            val lastId = it.maxOfOrNull { it.id } ?: 0
             data.value = listOf(post.copy(
                 id = lastId + 1,
                 author = "You",
@@ -132,6 +140,11 @@ class PostRepositoryInMemoryImpl : PostRepository {
                 if (it.id == post.id) post else it
             }
         }
+    }
+
+    override fun video() {
+        data.value
+
     }
 }
 
