@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:padding="16dp"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:padding="16dp">
 
 
     <ImageView
@@ -30,30 +30,20 @@
     <TextView
         android:id="@+id/author"
         android:layout_width="0dp"
-        android:maxLines="1"
-        android:ellipsize="end"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:ellipsize="end"
+        android:maxLines="1"
         app:layout_constraintBottom_toTopOf="@+id/published"
+        app:layout_constraintEnd_toStartOf="@id/menu"
         app:layout_constraintStart_toEndOf="@id/avatar"
         app:layout_constraintTop_toTopOf="@+id/avatar"
-        tools:text="@sample/posts.json/data/author"
-        app:layout_constraintEnd_toStartOf="@id/menu"
-        android:layout_marginStart="16dp"/>
-
-
-<!--    <ImageButton-->
-<!--        android:id="@+id/menu"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="12dp"-->
-<!--        android:background="@android:color/transparent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="@+id/avatar"-->
-<!--        app:srcCompat="@drawable/ic_more_vert_24" />-->
+        tools:text="@sample/posts.json/data/author" />
 
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/menu"
+        style="@style/Widget.AppTheme.RepostNumber"
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_marginTop="4dp"
@@ -62,8 +52,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/avatar"
-        style="@style/Widget.AppTheme.RepostNumber"/>
+        app:layout_constraintTop_toTopOf="@+id/avatar" />
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrier"
@@ -84,19 +73,57 @@
         app:layout_constraintTop_toBottomOf="@id/barrier"
         tools:text="@sample/posts.json/data/content" />
 
+
+    <RelativeLayout
+        android:id="@+id/mvideo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/text_field"
+        app:layout_constraintStart_toStartOf="@id/text_field"
+        app:layout_constraintTop_toBottomOf="@+id/text_field">
+
+        <ImageButton
+            android:id="@+id/play_video"
+            android:layout_width="wrap_content"
+            android:layout_height="250dp"
+            android:autoLink="web"
+            android:background="@drawable/photo"
+            android:checkable="false"
+            app:icon="@drawable/play_video"
+            />
+
+        <ImageView
+            android:id="@+id/preview_video"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/play_video"
+            android:layout_centerInParent="true"
+            app:tint="@android:color/white"
+            />
+
+        <TextView
+            android:id="@+id/video_link"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:autoLink="web"
+            android:singleLine="true"
+            android:text="linklinklink"
+            app:layout_constraintStart_toStartOf="parent"
+             />
+    </RelativeLayout>
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/likes"
         style="@style/Widget.AppTheme.LikeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:checkable="true"
         android:contentDescription="@string/description_post_like"
         android:text="0"
         app:icon="@drawable/ic_like_24dp"
         app:layout_constraintEnd_toStartOf="@+id/reposts"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_field" />
+        app:layout_constraintTop_toBottomOf="@+id/mvideo" />
 
 
     <com.google.android.material.button.MaterialButton
@@ -105,28 +132,41 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="52dp"
-        android:layout_marginTop="8dp"
         android:checkable="true"
         android:contentDescription="@string/description_post_like"
         android:text="0"
         app:icon="@drawable/ic_repost_24dp"
         app:layout_constraintStart_toEndOf="@+id/likes"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_field" />
+        app:layout_constraintTop_toBottomOf="@+id/mvideo" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/views"
         style="@style/Widget.AppTheme.RepostNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:checkable="true"
+        android:clickable="false"
         android:contentDescription="@string/description_post_like"
+        android:enabled="false"
         android:text="14"
-        app:layout_constraintEnd_toEndOf="parent"
         app:icon="@drawable/ic_views_24"
-        app:layout_constraintTop_toBottomOf="@+id/text_field"
-        tools:layout_editor_absoluteX="315dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mvideo" />
 
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_for_video"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:constraint_referenced_ids="mvideo" />
+
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/video_barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="top"
+        app:constraint_referenced_ids="mvideo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
