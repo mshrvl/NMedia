@@ -36,12 +36,10 @@ class PostViewHolder(
             videoLink.text = post.video
 
             if (post.video.isNullOrEmpty()) {
-                groupForVideo.visibility = View.VISIBLE
-            } else {
                 groupForVideo.visibility = View.GONE
+            } else {
+                groupForVideo.visibility = View.VISIBLE
             }
-
-
 
             likes.setOnClickListener {
                 onInteractionListener.onLike(post)
@@ -58,14 +56,22 @@ class PostViewHolder(
                                 onInteractionListener.onRemove(post)
                                 true
                             }
+
                             R.id.edit_content -> {
                                 onInteractionListener.onEdit(post)
                                 true
                             }
+
                             else -> false
                         }
                     }
                 }.show()
+            }
+            previewVideo.setOnClickListener {
+                onInteractionListener.onPlayVideo(post)
+            }
+            playVideo.setOnClickListener {
+                onInteractionListener.onPlayVideo(post)
             }
         }
     }
