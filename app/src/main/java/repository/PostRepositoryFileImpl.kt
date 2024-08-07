@@ -31,63 +31,58 @@ class PostRepositoryFileImpl(private val context: Context) : PostRepository {
     override fun getPosts(): LiveData<List<Post>> = data
 
     override fun likeById(id: Long) {
-        data.value?.let { posts ->
-            val newList = posts.map { post ->
-                if (id == post.id) {
-                    val newLikesCount = if (post.likedByMe) post.likes - 1 else post.likes + 1
-                    post.copy(likes = newLikesCount, likedByMe = !post.likedByMe)
-                } else {
-                    post
-                }
+        posts = posts.map { post ->
+            if (id == post.id) {
+                val newLikesCount = if (post.likedByMe) post.likes - 1 else post.likes + 1
+                post.copy(likes = newLikesCount, likedByMe = !post.likedByMe)
+            } else {
+                post
             }
-            data.value = newList
-            sync()
         }
+        data.value = posts
+        sync()
     }
 
     override fun repost(id: Long) {
-        data.value?.let { posts ->
-            val newList = posts.map { post ->
-                if (id == post.id) {
-                    val newRepostsCount = post.repostsN + 1
-                    post.copy(repostsN = newRepostsCount)
-                } else {
-                    post
-                }
+        posts = posts.map { post ->
+            if (id == post.id) {
+                val newRepostsCount = post.repostsN + 1
+                post.copy(repostsN = newRepostsCount)
+            } else {
+                post
             }
-            data.value = newList
-            sync()
         }
+        data.value = posts
+        sync()
     }
 
     override fun removeById(id: Long) {
-        data.value = data.value?.filter { it.id != id }
+        posts = posts.filter { it.id != id }
+        data.value = posts
         sync()
     }
 
     override fun save(post: Post) {
-        data.value?.let {
-            val lastId = it.maxOfOrNull { it.id } ?: 0
-            data.value = listOf(
-                post.copy(
-                    id = lastId + 1,
-                    author = "You",
-                    published = "few seconds ago"
-                )
-            ) + it
-            sync()
-        }
-
+        val lastId = posts.maxOfOrNull { it.id } ?: 0
+        posts = listOf(
+            post.copy(
+                id = lastId + 1,
+                author = "You",
+                published = "few seconds ago"
+            )
+        ) + posts
+        data.value = posts
+        sync()
     }
 
     override fun edit(post: Post) {
-        data.value?.let { it ->
-            data.value = it.map {
-                if (it.id == post.id) post else it
-            }
-            sync()
+        posts = posts.map {
+            if (it.id == post.id) post else it
         }
+        data.value = posts
+        sync()
     }
+
 
     override fun video() {
         data.value
